@@ -1,0 +1,44 @@
+# Eclipse specific files
+.project
+.classpath
+.settings/
+bin/
+tmp/
+tmp_build/
+
+# MacOS specific files
+.DS_Store
+
+# Windows specific files
+Thumbs.db
+
+# Eclipse Core resources
+.metadata
+.apt_generated
+.recommenders
+.loadpath
+
+# Java specific files
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.log
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Logs
+*.log
+
+# Temp files
+*.tmp
+*.temp
