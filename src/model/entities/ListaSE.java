@@ -19,7 +19,7 @@ public class ListaSE {
         Node current = this.head;
         Node prev = null;
         while (current != null) {
-            if (current.subject.name == name) {
+            if (current.subject.name.equals(name)) {
                 if (prev != null) {
                     prev.next = current.next;
                 } else {

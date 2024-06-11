@@ -103,4 +103,22 @@ public class BinaryTree {
         }
         return root;
     }
+    
+    public void removeSubjectFromAll(String sub) {
+        removeSubjectFromAllRec(root, sub);
+    }
+
+    // Método recursivo para percorrer a árvore em ordem
+    private void removeSubjectFromAllRec(NodeTree root, String sub) {
+        if (root != null) {
+            removeSubjectFromAllRec(root.left, sub);
+            // System.out.println(root.student);
+            if(root.student.getSubjects().contains(sub)) {
+            	root.student.removeSubject(sub);
+            	System.out.println("Removed!");
+            }
+            
+            removeSubjectFromAllRec(root.right, sub);
+        }
+    }
 }

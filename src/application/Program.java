@@ -15,30 +15,37 @@ public class Program {
 		int opt;
 		do {
 //			System.out.println("Bem vindo ao cadastro de alunos!\n Selecione uma opção:\n1 - Inserir aluno\n2 - Remover aluno\n3 - Buscar Aluno\n4 - Sair");
-			opt = Integer.parseInt(JOptionPane.showInputDialog("Bem vindo ao cadastro de alunos!\n Selecione uma opção:\n0 - Cadastrar Matéria\n1 - Inserir aluno\n2 - Remover aluno\n3 - Buscar Aluno\n4 - Editar Aluno\n5 - Sair"));
+			opt = Integer.parseInt(JOptionPane.showInputDialog("Bem vindo ao cadastro de alunos!\n Selecione uma opção:\n0 - Cadastrar Matéria\n1 - Remover Matéria\n2 - Inserir aluno\n3 - Remover aluno\n4 - Buscar Aluno\n5 - Editar Aluno\n6 - Sair"));
 			
 			switch(opt) {
 				case 0:
 					insert_subject(list);
 					break;
 				case 1:
-					insert_student(bt);
+					try {
+						remove_subject(bt, list);
+					} catch(Exception e) {
+						JOptionPane.showMessageDialog(null, e.getMessage());
+					}
 					break;
 				case 2:
+					insert_student(bt);
+					break;
+				case 3:
 					try {
 						remove_student(bt);
 					} catch(Exception e) {
 						JOptionPane.showMessageDialog(null, e.getMessage());
 					}
 					break;
-				case 3:
+				case 4:
 					try {
 						find_student(bt);
 					} catch(Exception e) {
 						JOptionPane.showMessageDialog(null, e.getMessage());
 					}
 					break;
-				case 4:
+				case 5:
 					try {
 						edit_student(bt, list);
 					} catch(Exception e) {
@@ -49,7 +56,7 @@ public class Program {
 					System.exit(1);
 					break;
 			}
-		}while(opt != 5);
+		}while(opt != 6);
 	}
 	
 	public static void insert_subject(ListaSE list) {
@@ -66,6 +73,26 @@ public class Program {
 		bt.insert(ra, name, email);
 		
 		JOptionPane.showMessageDialog(null, "Estudante inserido com sucesso!");
+	}
+	
+	public static void remove_subject(BinaryTree bt, ListaSE list) throws Exception {
+		if(list.isEmpty()) {
+			throw new Exception("Não há nenhuma matéria cadastrada para ser removida!");
+		}
+		String subject = JOptionPane.showInputDialog("Matérias que podem ser removidas:\nMateŕias:\n" + list.toString() + "\nDigite o nome da mateŕia que deseja remover:");
+		if(list.contains(subject)) {
+			int result = JOptionPane.showConfirmDialog(null, "Este processo removerá a matéria dos estudantes também.\nDeseja prosseguir?");
+			
+			if(result == JOptionPane.YES_OPTION) {
+				bt.removeSubjectFromAll(subject);
+				JOptionPane.showMessageDialog(null, "Matéria removida com sucesso!");
+			} else {
+				JOptionPane.showMessageDialog(null, "Matéria não remvoida!");
+			}
+			
+		} else {
+			JOptionPane.showMessageDialog(null, "Esta matéria não está cadastrada no sistema!");
+		}
 	}
 	
 	public static void remove_student(BinaryTree bt) throws Exception {
